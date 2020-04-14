@@ -65,10 +65,10 @@
     "preset": "ts-jest",
     "rootDir": ".",
     "coveragePathIgnorePatterns": [
-      ".src/sdk.ts"
+      "<rootDir>/src/sdk.ts"
     ],
     "setupFiles": [
-      "./jest-setup-file.ts"
+      "<rootDir>/src/setupJest.ts"
     ]
   }
 }
