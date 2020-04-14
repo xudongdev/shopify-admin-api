@@ -1,0 +1,17 @@
+fragment MailingAddress on MailingAddress {
+  address1
+  address2
+  city
+  company
+  country
+  countryCode: countryCodeV2
+  firstName
+  lastName
+  latitude
+  longitude
+  name
+  phone
+  province
+  provinceCode
+  zip
+}

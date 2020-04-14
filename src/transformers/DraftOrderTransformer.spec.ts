@@ -1,19 +1,35 @@
+/* eslint-disable @typescript-eslint/camelcase */
+
 import { SourceType } from "../enums/SourceType";
 import { DraftOrder } from "../objects/DraftOrder";
-import { DraftOrderFragment } from "../sdk";
 import { DraftOrderTransformer } from "./DraftOrderTransformer";
 
 describe(DraftOrderTransformer.name, () => {
   const transformer = new DraftOrderTransformer();
 
-  const graphQLDraftOrder: DraftOrderFragment = {
-    id: "gid://shopify/DraftOrder/123",
-  };
+  it(`${DraftOrderTransformer.name} ${SourceType.GRAPHQL}`, async () => {
+    expect(
+      transformer.run(
+        {
+          id: "gid://shopify/DraftOrder/123",
+        },
+        SourceType.GRAPHQL
+      )
+    ).toMatchObject({
+      id: 123,
+    } as DraftOrder);
+  });
 
-  describe("graphql", () => {
-    it("graphql", async () => {
-      const draftOrder = transformer.run(graphQLDraftOrder, SourceType.GRAPHQL);
-      expect(draftOrder).toMatchObject({} as DraftOrder);
-    });
+  it(`${DraftOrderTransformer.name} ${SourceType.REST}`, async () => {
+    expect(
+      transformer.run(
+        {
+          id: 123,
+        },
+        SourceType.REST
+      )
+    ).toMatchObject({
+      id: 123,
+    } as DraftOrder);
   });
 });

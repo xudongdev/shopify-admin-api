@@ -24,7 +24,8 @@
     "@graphql-codegen/typescript-graphql-request": "^1.13.2",
     "@shopify/admin-graphql-api-utilities": "0.0.12",
     "graphql": "^14.6.0",
-    "graphql-request": "^1.8.2"
+    "graphql-request": "^1.8.2",
+    "type-graphql": "^0.17.6"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.13.2",
@@ -32,7 +33,10 @@
     "@graphql-codegen/schema-ast": "^1.13.2",
     "@graphql-codegen/typescript": "^1.13.2",
     "@graphql-codegen/typescript-operations": "^1.13.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/graphql": "^14.5.0",
     "@types/jest": "^25.2.1",
+    "@types/source-map-support": "^0.5.1",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",
     "commitizen": "^4.0.4",
@@ -52,21 +56,19 @@
     "jest": "^25.3.0",
     "lint-staged": "^10.1.3",
     "prettier": "^2.0.4",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.16",
     "ts-jest": "^25.3.1",
     "typescript": "^3.8.3"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
+    "preset": "ts-jest",
+    "rootDir": ".",
+    "coveragePathIgnorePatterns": [
+      ".src/sdk.ts"
     ],
-    "rootDir": "src",
-    "testRegex": ".spec.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "coverageDirectory": "./coverage",
-    "testEnvironment": "node"
+    "setupFiles": [
+      "./jest-setup-file.ts"
+    ]
   }
 }

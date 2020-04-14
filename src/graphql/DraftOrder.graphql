@@ -1,3 +1,9 @@
 fragment DraftOrder on DraftOrder {
   id
+  billingAddress {
+    ...MailingAddress
+  }
+  shippingAddress {
+    ...MailingAddress
+  }
 }

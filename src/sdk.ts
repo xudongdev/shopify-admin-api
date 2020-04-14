@@ -17522,6 +17522,13 @@ export enum WeightUnit {
 export type DraftOrderFragment = (
   { __typename?: 'DraftOrder' }
   & Pick<DraftOrder, 'id'>
+  & { billingAddress?: Maybe<(
+    { __typename?: 'MailingAddress' }
+    & MailingAddressFragment
+  )>, shippingAddress?: Maybe<(
+    { __typename?: 'MailingAddress' }
+    & MailingAddressFragment
+  )> }
 );
 
 export type GetDraftOrderQueryVariables = {
@@ -17537,28 +17544,21 @@ export type GetDraftOrderQuery = (
   )> }
 );
 
-export type MailingAddressFragmentFragment = (
+export type MailingAddressFragment = (
   { __typename?: 'MailingAddress' }
-  & Pick<MailingAddress, 'address1' | 'address2' | 'city' | 'company' | 'country' | 'countryCodeV2' | 'firstName' | 'formatted' | 'formattedArea' | 'id' | 'lastName' | 'latitude' | 'longitude' | 'name' | 'phone' | 'province' | 'provinceCode' | 'zip'>
+  & Pick<MailingAddress, 'address1' | 'address2' | 'city' | 'company' | 'country' | 'firstName' | 'lastName' | 'latitude' | 'longitude' | 'name' | 'phone' | 'province' | 'provinceCode' | 'zip'>
+  & { countryCode: MailingAddress['countryCodeV2'] }
 );
 
-export const DraftOrderFragmentDoc = gql`
-    fragment DraftOrder on DraftOrder {
-  id
-}
-    `;
-export const MailingAddressFragmentFragmentDoc = gql`
-    fragment MailingAddressFragment on MailingAddress {
+export const MailingAddressFragmentDoc = gql`
+    fragment MailingAddress on MailingAddress {
   address1
   address2
   city
   company
   country
-  countryCodeV2
+  countryCode: countryCodeV2
   firstName
-  formatted
-  formattedArea
-  id
   lastName
   latitude
   longitude
@@ -17569,6 +17569,17 @@ export const MailingAddressFragmentFragmentDoc = gql`
   zip
 }
     `;
+export const DraftOrderFragmentDoc = gql`
+    fragment DraftOrder on DraftOrder {
+  id
+  billingAddress {
+    ...MailingAddress
+  }
+  shippingAddress {
+    ...MailingAddress
+  }
+}
+    ${MailingAddressFragmentDoc}`;
 export const GetDraftOrderDocument = gql`
     query getDraftOrder($id: ID!) {
   draftOrder(id: $id) {
