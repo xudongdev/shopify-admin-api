@@ -1,0 +1,4 @@
+{
+  "name": "Shopify Admin GraphQL Schema",
+  "schemaPath": "schema.graphql"
+}

@@ -1,0 +1,3 @@
+fragment DraftOrder on DraftOrder {
+  id
+}

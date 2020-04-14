@@ -1,0 +1,5 @@
+query getDraftOrder($id: ID!) {
+  draftOrder(id: $id) {
+    ...DraftOrder
+  }
+}
